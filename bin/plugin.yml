@@ -1,0 +1,31 @@
+name: CommunityBans
+main: com.communitybans.main.CommunityBans
+version: 0.1a
+author: Supersam654 and Hretsam
+commands:
+  test:
+    description: 
+    usage: 
+  kick:
+    description: Kicks a player from the game.
+    usage: /<command> <player> [reason]
+  ban:
+    description: ban a player permanently
+    usage: /<command> <player> [g/reason] [reason]
+  unban:
+    description: unban a player
+    usage: /<command> <player>
+  tempban:
+    description: Ban a player for a set amount of time.
+    usage: /<command> <player> <duration> <m(minutes) or h(hours) or d(days)> [reason]
+  lookup:
+    description: Find if a player has been globally banned before.
+    usage: /lookup <player>
+  lup:
+    description: Alias for the /lookup command.
+    usage: /lup <player>
+    
+    ##The /cbans command has not been implemented yet (I think)
+  cbans:
+    description: Gets basic plugin information
+    usage: /cban

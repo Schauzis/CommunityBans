@@ -1,0 +1,50 @@
+PLEASE KEEP IN MIND
+All commands are in the Commands class.
+Code that is commented out in a release build will probably be deleted completely deleted 1 or 2 builds later.
+
+ 
+ TODO
+ Implement a muting command -Supersam654 is on the job
+ Re-write the server-client communication.
+ Rename everything that says MCBans -Supersam654 is on the job.
+ Add Bukkit Permissions to the permission system.
+ Update config information with all of the permission nodes (flatfile)
+ Update all references to the Language file. -Supersam654 is on the job.
+ Actually add the action to commands, not just the message. -Supersam654 is on the job.
+ 
+ 
+ Permission Nodes I set up:
+ NOTE!!! These are all lower case because permission nodes are cases sensitive (last time I checked)
+ communitybans.ban.server
+ communitybans.ban.community
+ communitybans.ban.temp
+ communitybans.ban.lookup
+ communitybans.kick
+ communitybans.mute
+ communitybans.messages
+ 
+ ChangeLog
+ 0.1a Initial Public Release
+ 0.2a: 
+ 	Commented out the following:
+ 		ActionLog class
+ 		ban Class
+ 		connect Class
+ 		disconnect Class
+ 		kick Class
+ 		lookup class
+ 		messager Class
+ 		playerSet Class
+ 		Several small methods at the bottom of the CommunityBans Class
+ 			broadcastAll
+ 			broadcastPlayer
+ 			broadcastPlayer(Dif args)
+	Moved all commented out classes to the "Unused Class Files" folder.
+	Revamped the DevNoted.txt file.
+	Moved all commands into the Commands Class
+	Only using the Permission, communicate, and Main packages
+	Renamed sLog to log because there will only be 1 logging function.
+	Implemented a permission system that works with OPs, Niji Permissions, and Flat File.
+	Commented out several lines of code (temp) that directly attempt to talk with the server.
+	Renamed playerBanned to playerAction under the Commands Class.
+ 	

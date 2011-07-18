@@ -1,0 +1,11 @@
+## YAML Template.
+---
+
+## DISCRIPTION
+groups:
+  admin:
+    - 'permission.1'
+    
+users:
+  Hretsam: admin
+  supersam654: admin

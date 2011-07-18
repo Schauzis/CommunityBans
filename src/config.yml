@@ -1,0 +1,29 @@
+
+---
+
+Premium.address: 0
+Premium.enabled: true
+Premium.http_server: true
+Premium.webport: 20034
+Premium.rawport: 20035
+Premium.pass: <password>
+
+Ban.login_notify: true
+Ban.ban_notify: true
+Ban.show_alerts: true
+Ban.prefix: [C] 
+Ban.default_ban_reason: Griefing
+Ban.default_kick_reason: Profanity
+Ban.offline_protection: true
+
+Voting.enabled: true
+Voting.announce_votes: true
+Voting.message_color: blue
+Voting.yes_color: green
+Voting.no_color: red
+Voting.min_online_players: 4
+Voting.percent_voting_players: 50
+Voting.percent_kick_required: 70
+
+
+...
