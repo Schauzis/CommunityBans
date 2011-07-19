@@ -6,11 +6,12 @@ Code that is commented out in a release build will probably be deleted completel
  TODO
  Implement a muting command -Supersam654 is on the job
  Re-write the server-client communication.
- Rename everything that says MCBans -Supersam654 is on the job.
  Add Bukkit Permissions to the permission system.
  Update config information with all of the permission nodes (flatfile)
  Update all references to the Language file. -Supersam654 is on the job.
  Actually add the action to commands, not just the message. -Supersam654 is on the job.
+ 	Does not include anything server-side
+ 	Does include command arguments.
  
  
  Permission Nodes I set up:
@@ -21,10 +22,13 @@ Code that is commented out in a release build will probably be deleted completel
  communitybans.ban.lookup
  communitybans.kick
  communitybans.mute
- communitybans.messages
+ communitybans.messages.ban
+ communitybans.messages.login
+ communitybans.messages.update
  
  ChangeLog
- 0.1a Initial Public Release
+ 0.1a:
+ 	Initial Public Release
  0.2a: 
  	Commented out the following:
  		ActionLog class
@@ -47,4 +51,26 @@ Code that is commented out in a release build will probably be deleted completel
 	Implemented a permission system that works with OPs, Niji Permissions, and Flat File.
 	Commented out several lines of code (temp) that directly attempt to talk with the server.
 	Renamed playerBanned to playerAction under the Commands Class.
- 	
+0.3a:
+	Completely revamped the ServerBan command.
+		Removed all client-server communication
+		Replaced a complicated hashmap with a char variable.
+		Vastly shrunk the code to display text for the kicked player, all admins, and the server console
+		Nows calls on a local file to see if a player is already banned and now stores them here.
+			local file is created in the CommunityBans Class
+			text is added to the local file in the Commands Class (not implemented)
+	Moved the Permissions Class (under the main package) into the Unused Class Files Folder
+	Removed some commented-out code from the CBPlayerListener Class
+	Added a ThingsToTest.txt file
+	Revamped the config.yml file.
+		Made it look a lot nicer and more understandable.
+		Removed the [CommunityBans] prefix from the settings file.
+			This is non-negociable now.
+		Removed the offline_protection from the settings file.
+			CB only runs in Online Mode. Period.
+		Removed the login_notify option in the settings file.
+			giving someone the communitybans.messages.login will show them this
+		Removed the ban_notify option in the settings file.
+			giving someone the communitybans.messages.bans will show them this.
+	Added the communitybans.messages.update permission so admins can see when an update is available.
+	In the process of converting everything to the new name scheme (plugin name now comes with version and is in the main method)

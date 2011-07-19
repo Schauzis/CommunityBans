@@ -1,0 +1,20 @@
+Everything in this file are features of CommunityBans. I will slowly be compiling a list of everything
+that CommunityBans must do. As these features are tested, they will be marked as working or not working.
+This will also include what version they were tested against.
+
+General Features
+Disables itself in Offline Mode
+	Displays the proper message
+Permissions
+	Niji
+	OPs
+	Bukkit
+	Flatfile
+SBan Command
+CBan Command
+Lookup Command
+Kick Command
+Mute Command
+Settings
+Language
+Player pre-logon

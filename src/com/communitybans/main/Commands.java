@@ -17,7 +17,9 @@ public class Commands extends Thread {
 	private static String duration = null;
 	private static String message = null;
 //	private HashMap<String, Integer> banHashMap = new HashMap<String, Integer>();
-
+/*
+ * This code is never referenced so I see no reason to keep it.
+ * 
 	public static void ban(CommunityBans p, String playerAction,
 			String playerAdmin, String reason,
 			String duration, String message) {
@@ -29,6 +31,7 @@ public class Commands extends Thread {
 		Commands.message = message;
 //		this.action = action;
 	}
+*/ /** The unBan() method can undo a server ban, but not a community ban */
 	public static void unBan() {
 		String status = null;
 		String isSuccess = null;
@@ -49,57 +52,35 @@ public class Commands extends Thread {
 		CB.getServer().getPlayer(playerAdmin).sendMessage(ChatColor.DARK_RED + Language.getFormat(isSuccess));
 		CommunityBans.log.info(playerAdmin + " has unbanned " + playerAction + status + "!");
 	}
-
+/** The serverBan() method can ban someone from only your own server, no proof required. */
 	public static void serverBan() {
-		jsonHandler webHandle = new jsonHandler(CB);
-		HashMap<String, String> url_items = new HashMap<String, String>();
-		url_items.put("player", playerAction);
-		url_items.put("reason", reason);
-		url_items.put("admin", playerAdmin);
-		url_items.put("exec", "localBan");
-		HashMap<String, String> response = webHandle.mainRequest(url_items);
-		if (!response.containsKey("result")) {
-			CB.adminMessage(ChatColor.DARK_RED + Language.getFormat("SBanToAdminFailure",
-									playerAction, playerAdmin, reason));
-			return;
+		char canBan = 'n';
+		String successLevel = "unsuccessfully";
+		String message = "SBanToAdminsFailure";
+		//Insert code to find if a name is already in the ServerBanFile.
+		//Remember to set canBan to 'y'!
+		if (canBan == 'n') {
+			message = "SBanToAdminsFailure";
+			successLevel = "unsuccessfully";
 		}
-		if (response.get("result").equals("y")) {
-			CommunityBans.log.info(playerAction
-					+ " has been banned with a local type ban [" + reason
-					+ "] [" + playerAdmin + "]!");
-			if (CB.getServer().getPlayer(playerAction) != null) {
-				CB.getServer()
-						.getPlayer(playerAction)
-						.kickPlayer(
-								Language.getFormat(
-										"localBanMessageplayer", playerAction,
-										playerAdmin, reason));
-			}
-			CB.getServer().broadcastMessage(ChatColor.DARK_RED
-					+ Language.getFormat("localBanMessageSuccess",
-							playerAction, playerAdmin, reason));
-			return;
-		} else if (response.get("result").equals("e")) {
-			CB.getServer().getPlayer(playerAdmin).sendMessage(
-					ChatColor.DARK_RED
-							+ Language.getFormat("localBanMessageError",
-									playerAction, playerAdmin, reason));
-		} else if (response.get("result").equals("s")) {
-			CB.getServer().getPlayer(playerAdmin).sendMessage(
-					ChatColor.DARK_RED
-							+ Language.getFormat("localBanMessageGroup",
-									playerAction, playerAdmin, reason));
-		} else if (response.get("result").equals("a")) {
-			CB.getServer().getPlayer(playerAdmin).sendMessage(
-					ChatColor.DARK_RED
-							+ Language.getFormat(
-									"localBanMessageAlready", playerAction,
-									playerAdmin, reason));
+		if (canBan == 'y') {
+			CB.getServer().getPlayer(playerAction).kickPlayer(Language.getFormat(
+				"SBanToPlayer", playerAction, playerAdmin, reason));
+			message = "SBanToAdminsSuccess";
+			successLevel = "successfully";
+		} 
+		if (canBan == 'a') {
+			message = "SBanToAdminsAlready";
+			successLevel = "already";
 		}
-		CommunityBans.log.info(playerAdmin + " has tried to ban " + playerAction
-				+ " with a local type ban [" + reason + "]!");
+		CB.adminMessage(ChatColor.RED + Language.getFormat(message,
+						playerAction, playerAdmin, reason), "communitybans.messages.ban");
+		CommunityBans.log.info(playerAdmin + " has " + successLevel + " tried to ban " + playerAction
+				+ " with a server ban for " + reason + "!");
+		canBan = 'n';
+		successLevel = "unsuccessfully";
 	}
-
+/** The communityBan() method will eventually ban someone on all CB servers. REQUIRES PROOF */
 	public static void communityBan() {
 		jsonHandler webHandle = new jsonHandler(CB);
 		HashMap<String, String> url_items = new HashMap<String, String>();
@@ -148,7 +129,7 @@ public class Commands extends Thread {
 		CommunityBans.log.info(playerAdmin + " has tried to ban " + playerAction
 				+ " with a global type ban [" + reason + "]!");
 	}
-
+/** Temporarily bans a player from your server (temp serverBan) */
 	public static void tempBan() {
 		jsonHandler webHandle = new jsonHandler(CB);
 		HashMap<String, String> url_items = new HashMap<String, String>();
@@ -202,6 +183,7 @@ public class Commands extends Thread {
 		CommunityBans.log.info(playerAdmin + " has tried to ban " + playerAction
 				+ " with a temp type ban [" + reason + "]!");
 	}
+	/** kicks a player from the server, but they can rejoin instantly */
 	public static void kick() {
 		if (CB.getServer().getPlayer(playerAction) != null) {
 			CommunityBans.log.info(playerAdmin + " has kicked " + playerAction + "["
@@ -218,6 +200,7 @@ public class Commands extends Thread {
 			CB.getServer().broadcastMessage(ChatColor.DARK_RED + Language.getFormat("kickMessageNoplayer",	playerAction, playerAdmin, reason));
 		}
 	}
+	/** Looks up a player's username to see if they are in the CommunityBans DB */
 	public static void lookup() {
 		CommunityBans.log.info(playerAdmin + " has looked up the " + playerAction + ".");
 		HashMap<String, String> url_items = new HashMap<String, String>();
@@ -239,7 +222,7 @@ public class Commands extends Thread {
 		}
 		try {
 			CB.adminMessage(ChatColor.YELLOW + playerAction
-					+ " has " + totalBans + banTense);
+					+ " has " + totalBans + banTense, "communitybans.messages.login");
 			for (int v = 0; v < result.getJSONArray("local").length(); v++) {
 				CB.getServer().getPlayer(playerAdmin).sendMessage( "[Local] " + ChatColor.AQUA
 						+ result.getJSONArray("local").getString(v));
@@ -252,6 +235,7 @@ public class Commands extends Thread {
 		} catch (JSONException e) {
 		}
 	}
+	/** Mutes a player until they log out and rejoin the server */
 	public static void mute() {
 		if (CB.getServer().getPlayer(playerAction) !=null) {
 			CommunityBans.log.info(playerAdmin + " has muted " + playerAction + ".");

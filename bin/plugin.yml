@@ -1,11 +1,8 @@
 name: CommunityBans
 main: com.communitybans.main.CommunityBans
-version: 0.1a
+version: 0.3a
 author: Supersam654 and Hretsam
 commands:
-  test:
-    description: 
-    usage: 
   kick:
     description: Kicks a player from the game.
     usage: /<command> <player> [reason]

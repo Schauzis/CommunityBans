@@ -1,29 +1,33 @@
+#This is the config file for CommunityBans 
 
----
+#Everything under this section is only applicable for paying customers 
+#of CommunityBans. To find out more about the great features that the 
+#premium version of CommunityBans has to offer, go to 
+#www.CommunityBans.com. address is the ip address of your server 
+#(127.0.0.1:25565 or CommunityBans.com:25565) 
+Premium:
+    enabled: true
+    address: 0
+    http_server: true
+    webport: 20034
+    rawport: 20035
+    pass: <password>
 
-Premium.address: 0
-Premium.enabled: true
-Premium.http_server: true
-Premium.webport: 20034
-Premium.rawport: 20035
-Premium.pass: <password>
+#Everything under the Ban section deals with banning and kicking people.
+Ban:
+    default_ban_reason: Griefing
+    default_kick_reason: Profanity
 
-Ban.login_notify: true
-Ban.ban_notify: true
-Ban.show_alerts: true
-Ban.prefix: [C] 
-Ban.default_ban_reason: Griefing
-Ban.default_kick_reason: Profanity
-Ban.offline_protection: true
-
-Voting.enabled: true
-Voting.announce_votes: true
-Voting.message_color: blue
-Voting.yes_color: green
-Voting.no_color: red
-Voting.min_online_players: 4
-Voting.percent_voting_players: 50
-Voting.percent_kick_required: 70
-
-
-...
+#Everything in this section deals with the voting system
+#Announce_votes is if everyone should see when someone votes
+#percents are given WITHOUT %s. (type in 24 NOT 24% or %24)
+Voting:
+    enabled: true
+    announce_votes: true
+    message_color: blue
+    yes_color: green
+    no_color: red
+    min_online_players: 4
+    percent_voting_players: 50
+    percent_kick_required: 70
+	

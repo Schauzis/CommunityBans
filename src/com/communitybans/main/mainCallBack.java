@@ -46,7 +46,7 @@ public class mainCallBack extends Thread {
 		HashMap<String, String> response = webHandle.mainRequest(url_items);
 		if(response.containsKey("oldVersion")){
 			if(!response.get("oldVersion").equals("")){
-				CB.adminMessage( ChatColor.DARK_GREEN + "CommunityBans version " + response.get("oldVersion") + " now available!" );
+				CB.adminMessage(ChatColor.DARK_GREEN + "CommunityBans version " + response.get("oldVersion") + " now available!", "communitybans.messages.update" );
 			}
 		}
 // This purpose of the if statement below is not exactly understood and I will be deleting it
