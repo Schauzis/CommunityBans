@@ -1,6 +1,6 @@
 name: CommunityBans
 main: com.communitybans.main.CommunityBans
-version: 0.3a
+version: 0.7a
 author: Supersam654 and Hretsam
 commands:
   kick:

@@ -28,49 +28,77 @@ Code that is commented out in a release build will probably be deleted completel
  
  ChangeLog
  0.1a:
- 	Initial Public Release
+	 	Initial Public Release
  0.2a: 
- 	Commented out the following:
- 		ActionLog class
- 		ban Class
- 		connect Class
- 		disconnect Class
- 		kick Class
- 		lookup class
- 		messager Class
- 		playerSet Class
- 		Several small methods at the bottom of the CommunityBans Class
- 			broadcastAll
- 			broadcastPlayer
- 			broadcastPlayer(Dif args)
-	Moved all commented out classes to the "Unused Class Files" folder.
-	Revamped the DevNoted.txt file.
-	Moved all commands into the Commands Class
-	Only using the Permission, communicate, and Main packages
-	Renamed sLog to log because there will only be 1 logging function.
-	Implemented a permission system that works with OPs, Niji Permissions, and Flat File.
-	Commented out several lines of code (temp) that directly attempt to talk with the server.
-	Renamed playerBanned to playerAction under the Commands Class.
+	 	Commented out the following:
+	 		ActionLog class
+	 		ban Class
+	 		connect Class
+	 		disconnect Class
+	 		kick Class
+	 		lookup class
+	 		messager Class
+	 		playerSet Class
+	 		Several small methods at the bottom of the CommunityBans Class
+	 			broadcastAll
+	 			broadcastPlayer
+	 			broadcastPlayer(Dif args)
+		Moved all commented out classes to the "Unused Class Files" folder.
+		Revamped the DevNoted.txt file.
+		Moved all commands into the Commands Class
+		Only using the Permission, communicate, and Main packages
+		Renamed sLog to log because there will only be 1 logging function.
+		Implemented a permission system that works with OPs, Niji Permissions, and Flat File.
+		Commented out several lines of code (temp) that directly attempt to talk with the server.
+		Renamed playerBanned to playerAction under the Commands Class.
 0.3a:
-	Completely revamped the ServerBan command.
-		Removed all client-server communication
-		Replaced a complicated hashmap with a char variable.
-		Vastly shrunk the code to display text for the kicked player, all admins, and the server console
-		Nows calls on a local file to see if a player is already banned and now stores them here.
-			local file is created in the CommunityBans Class
-			text is added to the local file in the Commands Class (not implemented)
-	Moved the Permissions Class (under the main package) into the Unused Class Files Folder
-	Removed some commented-out code from the CBPlayerListener Class
-	Added a ThingsToTest.txt file
-	Revamped the config.yml file.
-		Made it look a lot nicer and more understandable.
-		Removed the [CommunityBans] prefix from the settings file.
-			This is non-negociable now.
-		Removed the offline_protection from the settings file.
-			CB only runs in Online Mode. Period.
-		Removed the login_notify option in the settings file.
-			giving someone the communitybans.messages.login will show them this
-		Removed the ban_notify option in the settings file.
-			giving someone the communitybans.messages.bans will show them this.
-	Added the communitybans.messages.update permission so admins can see when an update is available.
-	In the process of converting everything to the new name scheme (plugin name now comes with version and is in the main method)
+		Completely revamped the ServerBan command.
+			Removed all client-server communication
+			Replaced a complicated hashmap with a char variable.
+			Vastly shrunk the code to display text for the kicked player, all admins, and the server console
+			Nows calls on a local file to see if a player is already banned and now stores them here.
+				local file is created in the CommunityBans Class
+				text is added to the local file in the Commands Class (not implemented)
+		Moved the Permissions Class (under the main package) into the Unused Class Files Folder
+		Removed some commented-out code from the CBPlayerListener Class
+		Added a ThingsToTest.txt file
+		Revamped the config.yml file.
+			Made it look a lot nicer and more understandable.
+			Removed the [CommunityBans] prefix from the settings file.
+				This is non-negociable now.
+			Removed the offline_protection from the settings file.
+				CB only runs in Online Mode. Period.
+			Removed the login_notify option in the settings file.
+				giving someone the communitybans.messages.login will show them this
+			Removed the ban_notify option in the settings file.
+				giving someone the communitybans.messages.bans will show them this.
+		Added the communitybans.messages.update permission so admins can see when an update is available.
+		In the process of converting everything to the new name scheme (plugin name now comes with version and is in the main method)
+0.4a:
+        Added support for Bukkit superPerms
+        Added client - server communication system
+        Changed access for permmanager
+
+0.5a:
+        Moved permissions to more logical package
+        Fixed crash on loading in offline mode
+        Renamed error messages. (still need to be hooked in language)
+
+0.6a:
+        Added a lot of javadoc
+        Made a new Language class file, this one can load other languages as well.
+             The string in the language file are not set on load, but setted when they are first used.
+             This will keep the memory usage low (as uneeded strings are not loaded) & the keep it fast (as they are not read from the file with every request)
+        Started on interfaces to hook into other plugins (working on that)
+        Added Request superclass to requests & reqsponse objects are seperated
+        Changed exceptionhandling in communication handler
+        Renamed default files that can be loaded.
+        Renamed flatfile permission file from "players.yml" to "permissions.yml"
+        Added comments to DefaultPermissionFile
+        Added lib folder with latest plugins that can be used to prove bans.
+0.7a
+		Removed the "Unused Class Files" folder, it was not being used :D.
+		Major changes to the command system.
+			Changed the onCommand method in the CommunityBans class
+			Added an ArrayList to the same class
+			Major changes to the Commands Class, more than I want to explain.

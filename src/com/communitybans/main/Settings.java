@@ -22,31 +22,35 @@ public class Settings {
     /*
      * As a general rule, p = premium, v = vote, b = ban (Kinda misc)
      */
-    static int pAddress;
-    static int pWebPort;
-    static int pRawPort;
-    static int vMinOnlinePlayers;
-    static int vPercentVotingPlayers;
-    static int vPercentKickRequired;
-    static boolean pEnabled;
-    static boolean pHTTPServer;
-    static boolean vEnabled;
-    static boolean vAnnounceVotes;
-    static String language;
-    static String pPass;
-    static String bDefaultBan;
-    static String bDefaultKick;
-    static String vMessageColor;
-    static String vYesColor;
-    static String vNoColor;
+    public static int pAddress;
+    public static int pWebPort;
+    public static int pRawPort;
+    public static int vMinOnlinePlayers;
+    public static int vPercentVotingPlayers;
+    public static int vPercentKickRequired;
+    public static boolean pEnabled;
+    public static boolean pHTTPServer;
+    public static boolean vEnabled;
+    public static boolean vAnnounceVotes;
+    public static String language;
+    public static String pPass;
+    public static String bDefaultBan;
+    public static String bDefaultKick;
+    public static String vMessageColor;
+    public static String vYesColor;
+    public static String vNoColor;
+    
+    /** Debugging setting (prints out more logs) */
+    public static boolean isDebugging = true;
+    
 
-    public static boolean loadConfig(File dataFolder) {
+    public static boolean loadConfig(String dataFolder) {
         File configFile = new File(dataFolder + File.separator + "config.yml");
         if (!configFile.exists()) {
             try {
                 // Create a new file, and copy the contents of config.yml in the default package!
                 configFile.createNewFile();
-                InputStream stream = CommunityBans.class.getResourceAsStream("/config.yml");
+                InputStream stream = CommunityBans.class.getResourceAsStream("/DefaultConfigFile.yml");
                 OutputStream out = new FileOutputStream(configFile);
 
                 byte[] buf = new byte[1024];
@@ -56,40 +60,11 @@ public class Settings {
                 }
                 stream.close();
                 out.close();
-                CommunityBans.log.info("Config file not found, created new file");
+                CommunityBans.log.info(CommunityBans.pluginName + "Config file not found, created new file");
             } catch (IOException iex) {
-                CommunityBans.log.severe("Cannot create config file! " + iex.getMessage());
+                CommunityBans.log.severe(CommunityBans.pluginName + "Cannot create config file! " + iex.getMessage());
                 return false;
             }
-//			try {
-//				configFile.createNewFile();
-//				config.load();
-////				config.setProperty("Language", "English");
-//				config.setProperty("Premium.address", 0);
-//				config.setProperty("Premium.enabled", true);
-//				config.setProperty("Premium.http_server", true);
-//				config.setProperty("Premium.webport", 20034);
-//				config.setProperty("Premium.rawport", 20035);
-//				config.setProperty("Premium.pass", "<password>");
-//				config.setProperty("Ban.login_notify", true);
-//				config.setProperty("Ban.ban_notify", true);
-//				config.setProperty("Ban.show_alerts", true);
-//				config.setProperty("Ban.prefix", "[C] ");
-//				config.setProperty("Ban.default_ban_reason", "Griefing");
-//				config.setProperty("Ban.default_kick_reason", "Profanity");
-//				config.setProperty("Ban.offline_protection", true);
-//				config.setProperty("Voting.enabled", true);
-//				config.setProperty("Voting.announce_votes", true);
-//				config.setProperty("Voting.message_color", "blue");
-//				config.setProperty("Voting.yes_color", "green");
-//				config.setProperty("Voting.no_color", "red");
-//				config.setProperty("Voting.min_online_players", 4);
-//				config.setProperty("Voting.percent_voting_players", 50);
-//				config.setProperty("Voting.percent_kick_required", 70);
-//				config.save();
-//			} catch (Exception e) {
-//				CommunityBans.log.info(bPrefix + " Error when creating config file.");
-//			}
         }
         config = new Configuration(configFile);
         config.load();

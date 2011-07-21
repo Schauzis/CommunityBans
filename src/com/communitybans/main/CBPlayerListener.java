@@ -1,6 +1,7 @@
 package com.communitybans.main;
 
 import org.bukkit.ChatColor;
+import org.bukkit.event.player.PlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerPreLoginEvent;
@@ -25,8 +26,14 @@ public class CBPlayerListener extends PlayerListener {
     @Override
 	public void onPlayerJoin(PlayerJoinEvent event) {
 		if (Settings.getBoolean("bOfflineProtection") == true) {
-			event.getPlayer().sendMessage(ChatColor.DARK_GREEN
+			event.getPlayer().sendMessage(CommunityBans.pluginName + ChatColor.DARK_GREEN
 					+ "Server is secured by CommunityBans!");
 		}
 	}
+    public void onPlayerChat(PlayerChatEvent event) {
+    	String player = event.getPlayer().toString();
+    	if (CommunityBans.muted.contains(player)) {
+    		event.setCancelled(true);
+    	}
+    }
 }
